@@ -66,8 +66,6 @@ public class FetchWeatherService extends HandlerThread {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
