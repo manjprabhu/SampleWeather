@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
     @BindView(R.id.id_city)
     TextView city;
 
+    private final String TAG  = MainActivity.class.getSimpleName();
+
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private DataFetchListner dataFetchListner;
     FetchWeatherService fetchWeatherService;
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
     private void fetchWeather() {
 //    thread.start();
-        Log.v("manju","start fetchWeather");
+        Log.v(TAG,"start fetchWeather");
         fetchThread.start();
     }
 
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
             mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    android.util.Log.v("manju","location-->"+location.getLatitude()+ "Longitude-->"+location.getLongitude());
+                    android.util.Log.v(TAG,"location-->"+location.getLatitude()+ "Longitude-->"+location.getLongitude());
 
                     Bundle bundle = new Bundle();
                     bundle.putDouble("latitude",location.getLatitude());
@@ -162,24 +164,24 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
             }
 
         } catch (IOException e) {
-            Log.e("manju", "IOException ", e);
+            Log.e(TAG, "IOException ", e);
         } catch (Exception e) {
-            Log.e("manju", "Exception", e);
+            Log.e(TAG, "Exception", e);
         } finally {
             try {
                 if(stream!=null)
                     stream.close();
             } catch (IOException e) {
-                Log.e("manju", "IOException", e);
+                Log.e(TAG, "IOException", e);
             }
         }
-        Log.v("manju","Response readInputStream-->"+response.toString());
+        Log.v(TAG,"Response readInputStream-->"+response.toString());
         return response.toString();
     }
 
 
     private void fetchData() {
-        Log.v("manju","fetchData");
+        Log.v(TAG,"fetchData");
         double latitude=12.971599;
         double longitude=-77.594566;
         String forecastURL="https://api.darksky.net/forecast/" + "7e9e54f22038c6b245aceb3ab734c0ff" + "/" + latitude + "," + longitude;
@@ -200,19 +202,19 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
             JSONObject data = new JSONObject(json.toString());
 
-            Log.v("manju","jsondata-->"+data);
+            Log.v(TAG,"jsondata-->"+data);
 
             Gson gson = new Gson();
 
             final DailyData  dailyData = gson.fromJson(json.toString(),DailyData.class);
 
-            Log.v("manju","DailyData-->"+dailyData.getLatitude());
+            Log.v(TAG,"DailyData-->"+dailyData.getLatitude());
 
-            Log.v("manju","DailyData-->"+dailyData.getLongitude());
+            Log.v(TAG,"DailyData-->"+dailyData.getLongitude());
 
-            Log.v("manju","Summary-->"+dailyData.getCurrentWeatherData().getTemp());
+            Log.v(TAG,"Summary-->"+dailyData.getCurrentWeatherData().getTemp());
 
-            Log.v("manju","Hourly length-->"+dailyData.getHourlyData().getHourlyWeatherData().length);
+            Log.v(TAG,"Hourly length-->"+dailyData.getHourlyData().getHourlyWeatherData().length);
 
             runOnUiThread(new Runnable() {
                 @Override
