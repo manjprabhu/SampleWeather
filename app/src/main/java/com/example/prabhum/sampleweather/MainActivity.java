@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
     TextView city;
 
     private final String TAG  = MainActivity.class.getSimpleName();
+    private final String KEY = "7e9e54f22038c6b245aceb3ab734c0ff";
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private DataFetchListner dataFetchListner;
@@ -121,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
         public void run() {
             double latitude=37.8267;
             double longitude=-122.4233;
-            String forecastURL="https://api.darksky.net/forecast/" + "7e9e54f22038c6b245aceb3ab734c0ff" + "/" + latitude + "," + longitude;
+            String forecastURL="https://api.darksky.net/forecast/" + KEY + "/" + latitude + "," + longitude;
 
             HttpURLConnection httpURLConnection = null;
-            URL url = null;
+            URL url;
             try {
                 url = new URL(forecastURL);
                 httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
                 if(httpURLConnection.getResponseCode() == RESULT_OK) {
                     String response = readInputStream(httpURLConnection.getInputStream());
-                    Log.v("manju","response");
+                    Log.v(TAG,"response");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
         BufferedReader reader = new BufferedReader(inputStreamReader);
         StringBuilder response = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
 
             while ((line = reader.readLine()) != null) {
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
                     new InputStreamReader(connection.getInputStream()));
 
             StringBuffer json = new StringBuffer(1024);
-            String tmp="";
+            String tmp;
             while((tmp=reader.readLine())!=null)
                 json.append(tmp).append("\n");
             reader.close();
@@ -219,8 +220,8 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    temp.setText(""+dailyData.getCurrentWeatherData().getTemp());
-                    summary.setText(""+dailyData.getCurrentWeatherData().getSummary());
+                    temp.setText("Temp:"+dailyData.getCurrentWeatherData().getTemp());
+                    summary.setText("Summary"+dailyData.getCurrentWeatherData().getSummary());
                 }
             });
 
