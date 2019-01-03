@@ -1,4 +1,4 @@
-package com.example.prabhum.sampleweather;
+package com.btk.mnj.forecast;
 
 public interface DataFetchListner {
 

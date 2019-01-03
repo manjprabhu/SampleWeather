@@ -1,4 +1,4 @@
-package com.example.prabhum.sampleweather;
+package com.btk.mnj.forecast;
 
 import android.Manifest;
 import android.app.Activity;

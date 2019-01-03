@@ -1,4 +1,4 @@
-package com.example.prabhum.sampleweather;
+package com.btk.mnj.forecast;
 
 import android.app.Application;
 import android.net.ConnectivityManager;

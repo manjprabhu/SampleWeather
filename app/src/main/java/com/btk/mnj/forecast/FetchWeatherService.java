@@ -1,4 +1,4 @@
-package com.example.prabhum.sampleweather;
+package com.btk.mnj.forecast;
 
 import android.os.Bundle;
 import android.os.Handler;
