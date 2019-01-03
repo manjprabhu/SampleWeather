@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.btk.mnj.sampleweather"
+        applicationId "com.btk.mnj.forecast"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
