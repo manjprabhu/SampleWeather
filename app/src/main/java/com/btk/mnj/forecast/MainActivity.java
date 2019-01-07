@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
                     bundle.putDouble("latitude",location.getLatitude());
                     bundle.putDouble("longtitude",location.getLongitude());
 
-                    fetchWeatherService.postToQueue("currentlocation",bundle,dataFetchListner);
+//                    fetchWeatherService.postToQueue("currentlocation",bundle,dataFetchListner);
+//                    thread.start();
+                    fetchThread.start();
                 }
             });
         }
@@ -159,11 +161,9 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
         String line;
         try {
-
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
-
         } catch (IOException e) {
             Log.e(TAG, "IOException ", e);
         } catch (Exception e) {
@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
         Log.v(TAG,"Response readInputStream-->"+response.toString());
         return response.toString();
     }
-
 
     private void fetchData() {
         Log.v(TAG,"fetchData");
@@ -232,9 +231,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 
     public boolean isNetworkAvailable() {
         boolean isAvailable = false;
@@ -248,11 +245,9 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
     @Override
     public void onSucess(String response, DailyData dailyData) {
-
     }
 
     @Override
     public void onFailure(String response) {
-
     }
 }
