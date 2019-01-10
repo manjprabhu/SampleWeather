@@ -2,7 +2,7 @@ package com.btk.mnj.forecast;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DailyData {
+public class WeatherData {
 
     @SerializedName("latitude")
     private String latitude;
@@ -18,6 +18,9 @@ public class DailyData {
 
     @SerializedName("hourly")
     private hourly hourlyData;
+
+    @SerializedName("daily")
+    private Daily dailyForecastData;
 
     public hourly getHourlyData() {
         return hourlyData;
@@ -37,6 +40,10 @@ public class DailyData {
 
     public currently getCurrentWeatherData() {
         return currentWeatherData;
+    }
+
+    public Daily getDailyForecastData() {
+        return dailyForecastData;
     }
 
     public void setCurrentWeatherData(currently currentWeatherData) {

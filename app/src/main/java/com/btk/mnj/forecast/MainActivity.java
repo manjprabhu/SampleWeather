@@ -1,7 +1,6 @@
 package com.btk.mnj.forecast;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.ConnectivityManager;
@@ -10,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,19 +29,31 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
-    @BindView(R.id.id_temp)
+/*    @BindView(R.id.id_temp)
     TextView temp;
 
     @BindView(R.id.id_summary)
     TextView summary;
 
     @BindView(R.id.id_city)
-    TextView city;
+    TextView city;*/
+
+
+    @BindView(R.id.id_weather_icon)
+    ImageView mWeatherIcon;
+
+    @BindView(R.id.id_current_temp)
+    TextView mCurrentCityTemp;
+
+    @BindView(R.id.id_temp_summary)
+    TextView mTempSummary;
+
 
     private final String TAG  = MainActivity.class.getSimpleName();
     private final String KEY = "7e9e54f22038c6b245aceb3ab734c0ff";
@@ -55,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fetchWeatherService = new FetchWeatherService("FetchWeatherService");
+        fetchWeatherService = new FetchWeatherService("FetchWeatherService",this);
         fetchWeatherService.start();
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.mainview);
         ButterKnife.bind(this);
 
         if(checkLocationPermission()) {
@@ -185,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
         double latitude=12.971599;
         double longitude=-77.594566;
         String forecastURL="https://api.darksky.net/forecast/" + "7e9e54f22038c6b245aceb3ab734c0ff" + "/" + latitude + "," + longitude;
+        Log.v(TAG,"URL:"+forecastURL);
         String coord = latitude+","+longitude;
         try{
             URL url = new URL(String.format((forecastURL), coord));
@@ -206,21 +219,37 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
 
             Gson gson = new Gson();
 
-            final DailyData  dailyData = gson.fromJson(json.toString(),DailyData.class);
+            final WeatherData weatherData = gson.fromJson(json.toString(),WeatherData.class);
 
-            Log.v(TAG,"DailyData-->"+dailyData.getLatitude());
+            Log.v(TAG,"WeatherData-->"+ weatherData.getLatitude());
 
-            Log.v(TAG,"DailyData-->"+dailyData.getLongitude());
+            Log.v(TAG,"WeatherData-->"+ weatherData.getLongitude());
 
-            Log.v(TAG,"Summary-->"+dailyData.getCurrentWeatherData().getTemp());
+            Log.v(TAG,"Summary-->"+ weatherData.getCurrentWeatherData().getTemp());
 
-            Log.v(TAG,"Hourly length-->"+dailyData.getHourlyData().getHourlyWeatherData().length);
+            Log.v(TAG,"Hourly length-->"+ weatherData.getHourlyData().getHourlyWeatherData().length);
+
+            Log.v(TAG,"daily"+ weatherData.getDailyForecastData().getmDailyWeatherData().length);
+            Log.v(TAG,"daily"+ weatherData.getDailyForecastData().getDailySummary());
+
+
+            for(int i = 0; i< weatherData.getDailyForecastData().getmDailyWeatherData().length; i++) {
+                Log.v(TAG,"First-->"+ weatherData.getDailyForecastData().getmDailyWeatherData()[i].getDailyForecastSummay());
+            }
+
+            for(int i = 0; i< weatherData.getHourlyData().getHourlyWeatherData().length; i++) {
+                Log.v(TAG,"Time-->"+ weatherData.getHourlyData().getHourlyWeatherData()[i].getTime());
+            }
 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    temp.setText("Temp:"+dailyData.getCurrentWeatherData().getTemp());
-                    summary.setText("Summary"+dailyData.getCurrentWeatherData().getSummary());
+//                    city.setText("Bangalore");
+//                    temp.setText("Temp:"+convertFahrenheitToCelcius(weatherData.getCurrentWeatherData().getTemp()));
+//                    summary.setText("Summary"+ weatherData.getCurrentWeatherData().getSummary());
+
+                    mTempSummary.setText("Summary:"+weatherData.getCurrentWeatherData().getSummary());
+                    mCurrentCityTemp.setText("Temp:->"+weatherData.getCurrentWeatherData().getTemp());
                 }
             });
 
@@ -231,6 +260,14 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private float convertFahrenheitToCelcius(float fahrenheit) {
+        return ((fahrenheit - 32) * 5 / 9);
+    }
+
+    private float convertCelciusToFahrenheit(float celsius) {
+        return ((celsius * 9) / 5) + 32;
     }
 
     public boolean isNetworkAvailable() {
@@ -244,10 +281,11 @@ public class MainActivity extends AppCompatActivity implements DataFetchListner{
     }
 
     @Override
-    public void onSucess(String response, DailyData dailyData) {
+    public void onSucess(String response, WeatherData weatherData) {
     }
 
     @Override
     public void onFailure(String response) {
     }
+
 }
