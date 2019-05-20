@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardViewWeatherCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardElevation="2dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="1dp"
+        card_view:cardCornerRadius="4dp"
+        android:transitionName="weatherCardTransition">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:textAlignment="textStart"
+        android:textSize="20dp"
+        android:lineSpacingExtra="1.5dp"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="normal"
+        android:textColor="@color/cardview_dark_background"
+        android:id="@+id/id_list_item"/>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

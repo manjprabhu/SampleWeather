@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+<android.support.constraint.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/gradient">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorToolBar"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:text="@string/app_name"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_add_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_toolbar_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="55dp"
+            android:src="@drawable/ic_add_blue"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </Toolbar>
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_city_list"
+        android:name="com.mavenir.ucc.settings.ui.ContactPickerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".settings.ui.CallSettingsActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fitsSystemWindows="true"
+        app:layout_constraintStart_toStartOf="parent"/>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
+</layout>
+<!--
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/id_current_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="70dp"
+        android:text="Bangalore, India"
+        android:textSize="@dimen/main_view_city_text_size" />
+
+    <ImageView
+        android:id="@+id/id_weather_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/id_current_city"
+        android:layout_marginTop="65dp"
+        android:scaleType="centerInside"/>
+
+    <TextView
+        android:id="@+id/id_current_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/id_weather_icon"
+        android:layout_marginStart="156dp"
+        android:textSize="@dimen/main_view_temp_text_size" />
+
+    <TextView
+        android:id="@+id/id_temp_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:textSize="@dimen/main_view_summary_text_size"
+        android:layout_below="@id/id_weather_icon"
+        android:layout_alignStart="@id/id_weather_icon"/>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_add_city"
+        android:text="Add City"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
+-->

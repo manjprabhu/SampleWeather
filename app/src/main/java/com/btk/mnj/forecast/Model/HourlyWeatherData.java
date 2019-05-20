@@ -1,4 +1,4 @@
-package com.btk.mnj.forecast;
+package com.btk.mnj.forecast.Model;
 
 import com.google.gson.annotations.SerializedName;
 

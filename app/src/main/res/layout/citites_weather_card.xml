@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="4dp">
+
+<android.support.v7.widget.CardView
+    android:id="@+id/cardViewWeatherCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="2dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    card_view:cardCornerRadius="4dp"
+    android:transitionName="weatherCardTransition">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_card_city_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/default_city"
+            android:textSize="30sp"
+            android:textStyle=""
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_card_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            app:layout_constraintStart_toStartOf="@id/tv_card_city_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_city_name"/>
+
+        <ImageView
+            android:id="@+id/iv_card_weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_card_city_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_description"
+            android:src="@mipmap/ic_clear"/>
+
+        <TextView
+            android:id="@+id/tv_card_max_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="45"
+            android:fontFamily="sans-serif-condensed-light"
+            app:layout_constraintEnd_toEndOf="@id/tv_card_city_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_description"/>
+
+        <TextView
+            android:id="@+id/tv_card_min_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="23"
+            android:fontFamily="sans-serif-condensed-light"
+            app:layout_constraintEnd_toEndOf="@id/tv_card_max_temp"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_max_temp"/>
+
+        <TextView
+            android:id="@+id/tv_card_current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textStyle="normal"
+            android:textSize="40sp"
+            android:text="90"
+            android:layout_marginEnd="20dp"
+
+            app:layout_constraintEnd_toStartOf="@id/tv_card_max_temp"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_description"
+            app:layout_constraintBottom_toBottomOf="@id/tv_card_min_temp"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
+</RelativeLayout>

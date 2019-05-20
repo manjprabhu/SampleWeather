@@ -1,5 +1,8 @@
-package com.btk.mnj.forecast;
+package com.btk.mnj.forecast.Model;
 
+import com.btk.mnj.forecast.Model.Daily;
+import com.btk.mnj.forecast.Model.currently;
+import com.btk.mnj.forecast.Model.hourly;
 import com.google.gson.annotations.SerializedName;
 
 public class WeatherData {
@@ -21,6 +24,16 @@ public class WeatherData {
 
     @SerializedName("daily")
     private Daily dailyForecastData;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String city;
 
     public hourly getHourlyData() {
         return hourlyData;
@@ -65,5 +78,7 @@ public class WeatherData {
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
     }
+
+
 }
 

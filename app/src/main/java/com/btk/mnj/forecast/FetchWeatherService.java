@@ -8,6 +8,7 @@ import android.os.Message;
 import android.os.Process;
 import android.util.Log;
 
+import com.btk.mnj.forecast.Model.WeatherData;
 import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,15 @@ public class FetchWeatherService extends HandlerThread {
         mMainHandler = new Handler(context.getMainLooper());
     }
 
+
+    public void postTask(Runnable task) {
+        fetchDataHandler.post(task);
+    }
+
+    public void prepapreHandler() {
+        fetchDataHandler = new Handler(getLooper());
+
+    }
 
     @Override
     protected void onLooperPrepared() {
@@ -99,7 +109,7 @@ public class FetchWeatherService extends HandlerThread {
 
 
 
-    private void  fetchWeatherData(Double latitude,Double longitude) {
+/*    private void  fetchWeatherData(Double latitude,Double longitude) {
         Log.v(TAG,"Got fetchWeatherData");
 
 //        double latitude=12.971599;
@@ -132,7 +142,7 @@ public class FetchWeatherService extends HandlerThread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void postToQueue(String msg, Bundle data,DataFetchListner dataFetchListner) {
         Message message = fetchDataHandler.obtainMessage();

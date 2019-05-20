@@ -1,3 +1,151 @@
 <resources>
-    <string name="app_name">SampleWeather</string>
+    <string name="app_name">Forecast</string>
+    <string name="current_location">Current ocation</string>
+    <string name="add_city">Add new  location</string>
+    <string name="app_settings">Weather settings</string>
+    <string name="default_city">Bangalore, IN</string>
+    <string name="city_list">Add new location</string>
+    <string-array name="citylistarray">
+        <item>"Abu Dhabi"</item>
+        <item>"Agra"</item>
+        <item>"Amsterdam"</item>
+        <item>"Andorra La Vella"</item>
+        <item>"Antalya"</item>
+        <item>"Antwerp"</item>
+        <item>"Atlanta"</item>
+        <item>"Austin"</item>
+        <item>"Bangkok"</item>
+        <item>"Barcelona"</item>
+        <item>"Bangalore"</item>
+        <item>"Beijing"</item>
+        <item>"Benidorm"</item>
+        <item>"Berlin"</item>
+        <item>"Birmingham"</item>
+        <item>"Boston"</item>
+        <item>"Bratislava"</item>
+        <item>"Bruges"</item>
+        <item>"Brussels"</item>
+        <item>"Bucharest"</item>
+        <item>"Budapest"</item>
+        <item>"Buenos Aires"</item>
+        <item>"Burgas"</item>
+        <item>"Cairo"</item>
+        <item>"Cancún"</item>
+        <item>"Cape Town"</item>
+        <item>"Chengdu"</item>
+        <item>"Chennai"</item>
+        <item>"Chicago"</item>
+        <item>"Chongqing"</item>
+        <item>"Copenhagen"</item>
+        <item>"Dalian"</item>
+        <item>"Dammam"</item>
+        <item>"Denpasar"</item>
+        <item>"Djerba"</item>
+        <item>"Doha"</item>
+        <item>"Dubai"</item>
+        <item>"Dublin"</item>
+        <item>"Edinburgh"</item>
+        <item>"Edirne"</item>
+        <item>"Florence"</item>
+        <item>"Fortaleza"</item>
+        <item>"Geneva"</item>
+        <item>"Glasgow"</item>
+        <item>"Gothenburg"</item>
+        <item>"Granada"</item>
+        <item>"Guangzhou"</item>
+        <item>"Guilin"</item>
+        <item>"Hamburg"</item>
+        <item>"Hangzhou"</item>
+        <item>"Hanoi"</item>
+        <item>"Havana"</item>
+        <item>"Helsinki"</item>
+        <item>"Ho Chi Minh City"</item>
+        <item>"Hong Kong"</item>
+        <item>"Honolulu"</item>
+        <item>"Houston"</item>
+        <item>"Innsbruck"</item>
+        <item>"Istanbul"</item>
+        <item>"Jaipur"</item>
+        <item>"Johannesburg"</item>
+        <item>"Kraków"</item>
+        <item>"Kuala Lumpur"</item>
+        <item>"Kunming"</item>
+        <item>"Las Vegas"</item>
+        <item>"Lima"</item>
+        <item>"Lisbon"</item>
+        <item>"Liverpool"</item>
+        <item>"London"</item>
+        <item>"Los Angeles"</item>
+        <item>"Lyon"</item>
+        <item>"Macau"</item>
+        <item>"Madrid"</item>
+        <item>"Manama"</item>
+        <item>"Manchester"</item>
+        <item>"Marrakesh"</item>
+        <item>"Mecca"</item>
+        <item>"Melbourne"</item>
+        <item>"Mexico City"</item>
+        <item>"Miami"</item>
+        <item>"Milan"</item>
+        <item>"Montreal"</item>
+        <item>"Moscow"</item>
+        <item>"Muğla"</item>
+        <item>"Mumbai"</item>
+        <item>"Munich"</item>
+        <item>"Nairobi"</item>
+        <item>"Nanjing"</item>
+        <item>"New Delhi"</item>
+        <item>"New York City"</item>
+        <item>"Nice"</item>
+        <item>"Orlando"</item>
+        <item>"Oslo"</item>
+        <item>"Oxford"</item>
+        <item>"Paris"</item>
+        <item>"Pattaya"</item>
+        <item>"Phuket"</item>
+        <item>"Prague"</item>
+        <item>"Punta Cana"</item>
+        <item>"Qingdao"</item>
+        <item>"Richardson"</item>
+        <item>"Rio De Janeiro"</item>
+        <item>"Rome"</item>
+        <item>"Salvador"</item>
+        <item>"Salzburg"</item>
+        <item>"San Diego"</item>
+        <item>"San Francisco"</item>
+        <item>"San Jose"</item>
+        <item>"São Paulo"</item>
+        <item>"Seattle"</item>
+        <item>"Seoul"</item>
+        <item>"Seville"</item>
+        <item>"Shanghai"</item>
+        <item>"Shenzhen"</item>
+        <item>"Siem Reap"</item>
+        <item>"Singapore"</item>
+        <item>"Sofia"</item>
+        <item>"St. Petersburg"</item>
+        <item>"Stockholm"</item>
+        <item>"Suzhou"</item>
+        <item>"Sydney"</item>
+        <item>"Taipei"</item>
+        <item>"Tallinn"</item>
+        <item>"Tianjin"</item>
+        <item>"Tokyo"</item>
+        <item>"Toronto"</item>
+        <item>"Valencia"</item>
+        <item>"Varadero"</item>
+        <item>"Venice"</item>
+        <item>"Vienna"</item>
+        <item>"Warsaw"</item>
+        <item>"Washington"</item>
+        <item>"Wuxi"</item>
+        <item>"Xi’an"</item>
+        <item>"Xiamen"</item>
+        <item>"Zhuhai"</item>
+        <item>"Zürich"</item>
+
+
+    </string-array>
+    <string name="title_activity_city_list">CityList</string>
+
 </resources>
