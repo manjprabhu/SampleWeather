@@ -50,68 +50,13 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_city_list"
-        android:name="com.mavenir.ucc.settings.ui.ContactPickerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".settings.ui.CallSettingsActivity"
+        tools:context=".MainActivity"
         app:layout_constraintEnd_toEndOf="parent"
         android:fitsSystemWindows="true"
         app:layout_constraintStart_toStartOf="parent"/>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
 </layout>
-<!--
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient">
-
-    <TextView
-        android:id="@+id/id_current_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="70dp"
-        android:text="Bangalore, India"
-        android:textSize="@dimen/main_view_city_text_size" />
-
-    <ImageView
-        android:id="@+id/id_weather_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/id_current_city"
-        android:layout_marginTop="65dp"
-        android:scaleType="centerInside"/>
-
-    <TextView
-        android:id="@+id/id_current_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/id_weather_icon"
-        android:layout_marginStart="156dp"
-        android:textSize="@dimen/main_view_temp_text_size" />
-
-    <TextView
-        android:id="@+id/id_temp_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:textSize="@dimen/main_view_summary_text_size"
-        android:layout_below="@id/id_weather_icon"
-        android:layout_alignStart="@id/id_weather_icon"/>
-
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/id_add_city"
-        android:text="Add City"
-        android:layout_alignParentBottom="true"/>
-
-
-</RelativeLayout>
--->

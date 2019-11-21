@@ -1,9 +1,9 @@
 package com.btk.mnj.forecast.Util;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.btk.mnj.forecast.Model.WeatherData;
 import com.google.gson.Gson;
@@ -31,7 +31,6 @@ public class PersistenceManager {
         }
     }
 
-
     public static PersistenceManager getInstance() {
         return mInstance;
     }
@@ -40,8 +39,6 @@ public class PersistenceManager {
         Gson gson = new Gson();
         String weatherdata =  gson.toJson(data);
         mPref.edit().putString(DATA,weatherdata).commit();
-        String str  = gson.toJson(data);
-        mPref.edit().putString(DATA,str).commit();
     }
 
     public MutableLiveData<List<WeatherData>> getData() {
@@ -59,20 +56,56 @@ public class PersistenceManager {
         return livedata;
     }
 
-
-
-
     public void put(WeatherData data) {
+        Log.v("manju","put:"+data.getCity());
         Gson gson = new Gson();
         String weatherdata =  gson.toJson(data);
         mPref.edit().putString(DATA,weatherdata).commit();
     }
 
-    public MutableLiveData<WeatherData> getweatherData() {
-        String data =  mPref.getString(DATA, null);
-        MutableLiveData<WeatherData> livedata = new MutableLiveData<>();
+    public void putList(List<WeatherData> data) {
+        Log.v("manju","putList:"+data.get(0).getCity());
         Gson gson = new Gson();
-        livedata.setValue(gson.fromJson(data,WeatherData.class));
+        String weatherdata =  gson.toJson(data);
+        mPref.edit().putString(DATA,weatherdata).commit();
+    }
+
+    public List<WeatherData> get() {
+        String data =  mPref.getString(DATA, null);
+        Log.v("manju","get data:"+data);
+        Gson gson = new Gson();
+//        WeatherData weatherdata =  gson.fromJson(data,WeatherData.class);
+//        return weatherdata;
+
+        java.lang.reflect.Type type = new TypeToken<List<WeatherData>>(){}.getType();
+        List<WeatherData> list  = gson.fromJson(data,type);
+
+        if(list !=null) {
+            for(int i =0;i<list.size();i++) {
+                Log.v("manju","getdata:"+list.get(i).getCity());
+            }
+        }
+        return list;
+    }
+
+    public MutableLiveData<List<WeatherData>> getweatherData() {
+        String data =  mPref.getString(DATA, null);
+        Log.v("manju","getweatherData data:"+data);
+        MutableLiveData<List<WeatherData>> livedata = new MutableLiveData<>();
+        Gson gson = new Gson();
+//        livedata.setValue(gson.fromJson(data,WeatherData.class));
+
+
+        java.lang.reflect.Type type = new TypeToken<List<WeatherData>>(){}.getType();
+        List<WeatherData> list  = gson.fromJson(data,type);
+
+        if(list !=null) {
+            for(int i =0;i<list.size();i++) {
+                Log.v("manju","getdata:"+list.get(i).getCity());
+            }
+        }
+
+        livedata.setValue(list);
         return livedata;
     }
 
