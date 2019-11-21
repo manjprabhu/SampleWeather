@@ -5,7 +5,9 @@ import com.btk.mnj.forecast.Model.currently;
 import com.btk.mnj.forecast.Model.hourly;
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherData {
+import java.io.Serializable;
+
+public class WeatherData implements Serializable {
 
     @SerializedName("latitude")
     private String latitude;

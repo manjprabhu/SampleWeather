@@ -2,7 +2,9 @@ package com.btk.mnj.forecast.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DailyWeatherData {
+import java.io.Serializable;
+
+public class DailyWeatherData  implements Serializable {
 
     @SerializedName("summary")
     String dailyForecastSummay;

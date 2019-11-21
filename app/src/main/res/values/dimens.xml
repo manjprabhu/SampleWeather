@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_view_temp_text_size">40sp</dimen>
+    <dimen name="main_view_summary_text_size">15sp</dimen>
+    <dimen name="main_view_city_text_size">25sp</dimen>
+</resources>

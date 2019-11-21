@@ -2,7 +2,9 @@ package com.btk.mnj.forecast.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class HourlyWeatherData {
+import java.io.Serializable;
+
+public class HourlyWeatherData  implements Serializable {
 
     @SerializedName("time")
     private long time;
