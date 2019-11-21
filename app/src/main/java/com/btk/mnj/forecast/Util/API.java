@@ -13,7 +13,6 @@ public class API {
 
     public static Retrofit getRetrofitClient() {
         if(retrofit == null) {
-
             retrofit = new Retrofit.Builder()
                     .baseUrl(base_url)
                     .addConverterFactory(GsonConverterFactory.create())
