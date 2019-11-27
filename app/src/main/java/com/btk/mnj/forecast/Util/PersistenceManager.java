@@ -16,6 +16,8 @@ import java.util.List;
 
 public class PersistenceManager {
 
+    private final String TAG = PersistenceManager.class.getSimpleName();
+
     private static PersistenceManager mInstance = null;
     private static final String PREF_KEY = "com.sample.pref";
     private static final String DATA = "com.weatherdata";
@@ -57,7 +59,7 @@ public class PersistenceManager {
     }
 
     public void put(WeatherData data) {
-        Log.v("manju","put:"+data.getCity());
+        Log.v(TAG,"put:"+data.getCity());
         Gson gson = new Gson();
         String weatherdata =  gson.toJson(data);
         mPref.edit().putString(DATA,weatherdata).commit();
@@ -72,7 +74,7 @@ public class PersistenceManager {
 
     public List<WeatherData> get() {
         String data =  mPref.getString(DATA, null);
-        Log.v("manju","get data:"+data);
+        Log.v(TAG,"get data:"+data);
         Gson gson = new Gson();
 //        WeatherData weatherdata =  gson.fromJson(data,WeatherData.class);
 //        return weatherdata;
@@ -82,7 +84,7 @@ public class PersistenceManager {
 
         if(list !=null) {
             for(int i =0;i<list.size();i++) {
-                Log.v("manju","getdata:"+list.get(i).getCity());
+                Log.v(TAG,"getdata:"+list.get(i).getCity());
             }
         }
         return list;
@@ -90,7 +92,7 @@ public class PersistenceManager {
 
     public MutableLiveData<List<WeatherData>> getweatherData() {
         String data =  mPref.getString(DATA, null);
-        Log.v("manju","getweatherData data:"+data);
+        Log.v(TAG,"getweatherData data:"+data);
         MutableLiveData<List<WeatherData>> livedata = new MutableLiveData<>();
         Gson gson = new Gson();
 //        livedata.setValue(gson.fromJson(data,WeatherData.class));
@@ -101,7 +103,7 @@ public class PersistenceManager {
 
         if(list !=null) {
             for(int i =0;i<list.size();i++) {
-                Log.v("manju","getdata:"+list.get(i).getCity());
+                Log.v(TAG,"getdata:"+list.get(i).getCity());
             }
         }
 
