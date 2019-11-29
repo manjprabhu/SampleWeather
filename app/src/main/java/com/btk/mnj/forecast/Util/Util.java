@@ -15,8 +15,8 @@ import java.util.TimeZone;
 
 public class Util {
 
+    private final static String TAG = Util.class.getSimpleName();
     public static final String[] LOCATION_PERMISSION = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-
 
     public static Typeface getXLightTypeface(Context context) {
         String mTtfFontName = "GothamNarrow-XLight.otf";
@@ -40,7 +40,6 @@ public class Util {
                 icon = R.mipmap.ic_clear;
         }
         return icon;
-
     }
 
     public static String convertFahrenheitToCelcius(float fahrenheit) {
@@ -53,7 +52,7 @@ public class Util {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         String formatted = format.format(date);
-        Log.v("manju","getForecastDay-->"+formatted);
+        Log.v(TAG,"getForecastDay-->"+formatted);
         return formatted;
     }
 }

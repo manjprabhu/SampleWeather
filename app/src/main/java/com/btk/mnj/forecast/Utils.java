@@ -26,7 +26,6 @@ public class  Utils {
         populateCityList();
     }
 
-
     public static  void init(Context context) {
         mContext = context;
     }

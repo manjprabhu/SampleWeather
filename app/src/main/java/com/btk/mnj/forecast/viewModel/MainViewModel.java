@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.btk.mnj.forecast.Model.WeatherData;
 import com.btk.mnj.forecast.Network.WeatherService;
-import com.btk.mnj.forecast.Util.API;
+import com.btk.mnj.forecast.Network.API;
 import com.btk.mnj.forecast.Util.PersistenceManager;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.btk.mnj.forecast.Util;
+package com.btk.mnj.forecast.Network;
 
 import java.util.concurrent.TimeUnit;
 
@@ -41,5 +41,4 @@ public class API {
         }
         return retrofit;
     }
-
 }
