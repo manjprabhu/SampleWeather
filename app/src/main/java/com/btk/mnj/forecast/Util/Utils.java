@@ -1,4 +1,4 @@
-package com.btk.mnj.forecast;
+package com.btk.mnj.forecast.Util;
 
 import android.Manifest;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+
+import com.btk.mnj.forecast.R;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -20,7 +22,12 @@ import java.util.TimeZone;
 public class  Utils {
 
     private static final String TAG  = Utils.class.getSimpleName();
-    public static final String[] LOCATION_PERMISSION = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    public static final int ADD_CITY_LIST = 100;
+    public static final int LOCATION_PERMISSION = 100;
+    public static final String KEY = "7e9e54f22038c6b245aceb3ab734c0ff";
+
+
+    public static final String[] LOCATION_PERMISSIONS = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
     private static LinkedHashMap<String,cordinates> citiListMap  = new LinkedHashMap<>();
     private static LinkedHashMap<String, cordinates> addCityList =  new LinkedHashMap<>();

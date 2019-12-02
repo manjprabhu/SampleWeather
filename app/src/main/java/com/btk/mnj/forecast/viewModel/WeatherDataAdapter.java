@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.btk.mnj.forecast.Model.WeatherData;
 import com.btk.mnj.forecast.R;
-import com.btk.mnj.forecast.Util.Util;
+import com.btk.mnj.forecast.Util.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,12 +43,12 @@ public class WeatherDataAdapter extends RecyclerView.Adapter<WeatherDataAdapter.
     public void onBindViewHolder(@NonNull WeatherDataHolder weatherDataHolder, int i) {
         Log.v(TAG,"onBindViewHolder-->"+ i);
         weatherDataHolder.cityName.setText(cities.get(i).getCity());
-        weatherDataHolder.currentTemp.setText(Util.convertFahrenheitToCelcius(cities.get(i).getCurrentWeatherData().getTemp())+(char) 0x00B0 + "c");
+        weatherDataHolder.currentTemp.setText(Utils.convertFahrenheitToCelcius(cities.get(i).getCurrentWeatherData().getTemp())+(char) 0x00B0 + "c");
         weatherDataHolder.description.setText(cities.get(i).getCurrentWeatherData().getSummary());
-        weatherDataHolder.maxTemp.setText(Util.convertFahrenheitToCelcius(cities.get(i).getDailyForecastData().getDailyWeatherData()[i].getDailyForecastMaxTemp())+ "" +(char) 0x00B0 + "c");
-        weatherDataHolder.minTemp.setText(Util.convertFahrenheitToCelcius(cities.get(i).getDailyForecastData().getDailyWeatherData()[i].getDailyForecastMinTemp())+ "" +(char) 0x00B0 + "c");
+        weatherDataHolder.maxTemp.setText(Utils.convertFahrenheitToCelcius(cities.get(i).getDailyForecastData().getDailyWeatherData()[i].getDailyForecastMaxTemp())+ "" +(char) 0x00B0 + "c");
+        weatherDataHolder.minTemp.setText(Utils.convertFahrenheitToCelcius(cities.get(i).getDailyForecastData().getDailyWeatherData()[i].getDailyForecastMinTemp())+ "" +(char) 0x00B0 + "c");
 
-        Picasso.with(activity).load(Util.getForecastIcon(cities.get(i).getCurrentWeatherData().getSummary())).into(weatherDataHolder.forecastIcon);
+        Picasso.with(activity).load(Utils.getForecastIcon(cities.get(i).getCurrentWeatherData().getSummary())).into(weatherDataHolder.forecastIcon);
         weatherDataHolder.cardView.setOnClickListener(v -> onItemClickListener.onItemClick(cities.get(i), weatherDataHolder.getAdapterPosition(),weatherDataHolder.cardView));
     }
 

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.btk.mnj.forecast.Model.WeatherData;
 import com.btk.mnj.forecast.R;
-import com.btk.mnj.forecast.Util.Util;
+import com.btk.mnj.forecast.Util.Utils;
 
 public class WeatherDetailsAdapter extends RecyclerView.Adapter<WeatherDetailsAdapter.ForecastViewHolder> {
 
@@ -31,7 +31,7 @@ public class WeatherDetailsAdapter extends RecyclerView.Adapter<WeatherDetailsAd
         forecastViewHolder.summary.setText(weatherData.getDailyForecastData().getDailyWeatherData()[i].getDailyForecastSummay());
         forecastViewHolder.dailyMaxTemp.setText(convertFahrenheitToCelcius(weatherData.getDailyForecastData().getDailyWeatherData()[i].getDailyForecastMaxTemp()));
         forecastViewHolder.dailyMinTemp.setText(convertFahrenheitToCelcius(weatherData.getDailyForecastData().getDailyWeatherData()[i].getDailyForecastMinTemp()));
-        forecastViewHolder.dailyDay.setText(Util.getForecastDay(weatherData.getDailyForecastData().getDailyWeatherData()[i].getDailyForecastTime()));
+        forecastViewHolder.dailyDay.setText(Utils.getForecastDay(weatherData.getDailyForecastData().getDailyWeatherData()[i].getDailyForecastTime()));
     }
 
     @Override

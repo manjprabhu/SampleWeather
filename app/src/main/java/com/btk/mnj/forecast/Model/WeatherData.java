@@ -10,10 +10,10 @@ import java.io.Serializable;
 public class WeatherData implements Serializable {
 
     @SerializedName("latitude")
-    private String latitude;
+    private double latitude;
 
     @SerializedName("longitude")
-    private String longitude;
+    private double longitude;
 
     @SerializedName("timezone")
     private String timeZone;
@@ -41,11 +41,11 @@ public class WeatherData implements Serializable {
         return hourlyData;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -69,11 +69,11 @@ public class WeatherData implements Serializable {
         this.hourlyData = hourlyData;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

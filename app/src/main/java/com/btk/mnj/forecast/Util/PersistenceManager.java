@@ -9,6 +9,7 @@ import com.btk.mnj.forecast.Model.WeatherData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class PersistenceManager {
     public void putweatherData(HashMap<String,WeatherData> data) {
         Gson gson = new Gson();
         String weatherdata =  gson.toJson(data);
-        mPref.edit().putString(DATA,weatherdata).commit();
+        mPref.edit().putString(DATA,weatherdata).apply();
     }
 
     public MutableLiveData<List<WeatherData>> getData() {
@@ -62,25 +63,22 @@ public class PersistenceManager {
         Log.v(TAG,"put:"+data.getCity());
         Gson gson = new Gson();
         String weatherdata =  gson.toJson(data);
-        mPref.edit().putString(DATA,weatherdata).commit();
+        mPref.edit().putString(DATA,weatherdata).apply();
     }
 
     public void putList(List<WeatherData> data) {
-        Log.v("manju","putList:"+data.get(0).getCity());
+        Log.v(TAG,"putList:"+data.get(0).getCity());
         Gson gson = new Gson();
         String weatherdata =  gson.toJson(data);
-        mPref.edit().putString(DATA,weatherdata).commit();
+        mPref.edit().putString(DATA,weatherdata).apply();
     }
 
     public List<WeatherData> get() {
         String data =  mPref.getString(DATA, null);
         Log.v(TAG,"get data:"+data);
-        Gson gson = new Gson();
-//        WeatherData weatherdata =  gson.fromJson(data,WeatherData.class);
-//        return weatherdata;
 
-        java.lang.reflect.Type type = new TypeToken<List<WeatherData>>(){}.getType();
-        List<WeatherData> list  = gson.fromJson(data,type);
+        Type listType = new TypeToken<List<WeatherData>>(){}.getType();
+        List<WeatherData> list  = new Gson().fromJson(data,listType);
 
         if(list !=null) {
             for(int i =0;i<list.size();i++) {

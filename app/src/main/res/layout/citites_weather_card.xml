@@ -17,8 +17,7 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="4dp"
-    card_view:cardCornerRadius="4dp"
-    android:transitionName="weatherCardTransition">
+    card_view:cardCornerRadius="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:background="@drawable/card_bg_gradient"
@@ -36,7 +35,8 @@
             android:textSize="30sp"
             android:fontFamily="serif"
             android:textStyle="normal"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:transitionName="weatherCardTransition" />
 
         <TextView
             android:id="@+id/tv_card_description"

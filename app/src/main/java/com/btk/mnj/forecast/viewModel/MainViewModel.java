@@ -10,13 +10,13 @@ import android.util.Log;
 
 import com.btk.mnj.forecast.Model.WeatherData;
 import com.btk.mnj.forecast.Network.WeatherService;
-import com.btk.mnj.forecast.Network.API;
+import com.btk.mnj.forecast.Network.RetrofitClient;
 import com.btk.mnj.forecast.Util.PersistenceManager;
+import com.btk.mnj.forecast.Util.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,84 +26,89 @@ import retrofit2.Response;
 public class MainViewModel extends AndroidViewModel {
 
     private final String TAG = MainViewModel.class.getSimpleName();
-    private MutableLiveData<WeatherData> liveData = new MutableLiveData<WeatherData>();
     private MutableLiveData<List<WeatherData>> listliveData = new MutableLiveData<List<WeatherData>>();
     private List<WeatherData> list = new ArrayList<>();
-    private HashSet<WeatherData> dataSet = new HashSet<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);
     }
-
-    public MutableLiveData<WeatherData> getWeatherData() {
-//        liveData = PersistenceManager.getInstance().getweatherData();
-        return liveData;
-    }
-
     public MutableLiveData<List<WeatherData>> getWeatherDataList() {
-//        liveData = PersistenceManager.getInstance().getweatherData();
-//        listliveData = PersistenceManager.getInstance().getweatherData();
         listliveData.setValue(PersistenceManager.getInstance().get());
         return listliveData;
     }
 
     public void fetchCurrentCityData(Double latitude, Double longitude) {
         Log.v(TAG,"fetchCurrentCityData");
-
         String city =  getLocationName(latitude,longitude);
+        Log.v(TAG,"city::"+city);
 
-        Log.v("manju","city::"+city);
-
-        WeatherService weatherService = API.getRetrofitClient().create(WeatherService.class);
-
-        weatherService.getData(API.KEY, latitude,longitude).enqueue(new Callback<WeatherData>() {
+        WeatherService weatherService = RetrofitClient.getRetrofitClient().create(WeatherService.class);
+        weatherService.getData(Utils.KEY, latitude,longitude).enqueue(new Callback<WeatherData>() {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                response.body().setCity(city);
-//                PersistenceManager.getInstance().put(response.body());
-                writePersistence(response.body());
-//                liveData.setValue(response.body());
+                if(response.isSuccessful()) {
+                    Log.v(TAG,"fetchcurrent city data is success");
+                    response.body().setCity(city);
+                    writePersistence(response.body());
+                }
             }
-
             @Override
             public void onFailure(Call<WeatherData> call, Throwable t) {
+                Log.v(TAG,"fetchcurrent city data is  failed:"+t.toString());
             }
         });
     }
 
     public void fetchActualData(String city) {
-        HashMap<String, Float> cordinates = getCordinateforCity(city);
-        WeatherService weatherService = API.getRetrofitClient().create(WeatherService.class);
+//        HashMap<String, Float> cordinates = getCordinateforCity(city);
+        Utils.cordinates cordinates = Utils.getCityFromAddedCityList(city);
 
         if(cordinates ==null) {
             return;
         }
-
-        float latitude =  cordinates.get("Latitude");
-        float longitude = cordinates.get("Longitude");
+        double latitude =  cordinates.getLatitude();
+        double longitude = cordinates.getLongitude();
+//        float latitude =  cordinates.get("Latitude");
+//        float longitude = cordinates.get("Longitude");
         Log.v(TAG," viewmodel latitude-->"+latitude +"longitude-->"+longitude);
 
-        weatherService.getData(API.KEY,latitude,longitude).enqueue(new Callback<WeatherData>() {
+        WeatherService weatherService = RetrofitClient.getRetrofitClient().create(WeatherService.class);
+        weatherService.getData(Utils.KEY,latitude,longitude).enqueue(new Callback<WeatherData>() {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                Log.v(TAG," viewmodel onResponse-->"+response.body());
-
-                response.body().setCity(city);
-//                Log.v("manju","get:"+PersistenceManager.getInstance().get().getCity());
-//                PersistenceManager.getInstance().put(response.body());
-                writePersistence(response.body());
-//                liveData.setValue(response.body());
-//                dataMap.put(city,response.body());
-//                saveData(city,response.body());
-//
-//                data.add(response.body());
-//                listMutableLiveData.setValue(data);
+                if(response.isSuccessful()) {
+                    Log.v(TAG," viewmodel onResponse-->"+response.body());
+                    response.body().setCity(city);
+                    writePersistence(response.body());
+                }
             }
 
             @Override
             public void onFailure(Call<WeatherData> call, Throwable t) {
+                Log.v(TAG,"Viewmodel onFailure:"+t.toString());
             }
         });
+    }
+
+    public void updateData(WeatherData data) {
+        Log.v(TAG,"UpdateData:");
+
+        WeatherService weatherService = RetrofitClient.getRetrofitClient().create(WeatherService.class);
+        weatherService.getData(Utils.KEY,data.getLatitude(),data.getLongitude()).enqueue(new Callback<WeatherData>() {
+            @Override
+            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
+                if(response.isSuccessful()) {
+                    Log.v(TAG,"UpdateData success:"+response.body());
+                    response.body().setCity(data.getCity());
+                    writePersistence(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<WeatherData> call, Throwable t) {
+                Log.v(TAG,"UpdateData failure");
+            }
+        });
+
     }
 
     private HashMap<String, Float> getCordinateforCity(String city) {
@@ -149,7 +154,7 @@ public class MainViewModel extends AndroidViewModel {
 
         if(weatherData!=null) {
             for(int i =0;i<weatherData.size();i++) {
-                Log.v("manju","writePersistence get:"+ weatherData.get(i).getCity());
+                Log.v(TAG,"writePersistence get:"+ weatherData.get(i).getCity());
                 if(weatherData.get(i).getCity().equalsIgnoreCase(data.getCity()))
                     return;
             }
@@ -160,7 +165,7 @@ public class MainViewModel extends AndroidViewModel {
 
         weatherData.add(data);
         PersistenceManager.getInstance().putList(weatherData);
-        Log.v("manju","writePersistence after add:"+list.size());
+        Log.v(TAG,"writePersistence after add:"+list.size());
         listliveData.setValue(weatherData);
     }
 }
