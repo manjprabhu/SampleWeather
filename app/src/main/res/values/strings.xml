@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Forecast</string>
-    <string name="current_location">Current ocation</string>
-    <string name="add_city">Add new  location</string>
-    <string name="app_settings">Weather settings</string>
+    <string name="current_location">Current Location</string>
+    <string name="add_city">Add new location</string>
+    <string name="app_settings">Settings</string>
     <string name="default_city">Bangalore, IN</string>
-    <string name="city_list">Add new location</string>
     <string-array name="citylistarray">
         <item>"Abu Dhabi"</item>
         <item>"Agra"</item>
@@ -143,8 +142,6 @@
         <item>"Xiamen"</item>
         <item>"Zhuhai"</item>
         <item>"Zürich"</item>
-
-
     </string-array>
     <string name="title_activity_city_list">CityList</string>
 

@@ -71,7 +71,8 @@
         android:textStyle="normal"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/appbar"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:transitionName="weatherCardTransition"/>
 
     <ImageView
         android:id="@+id/iv_forecast_icon"

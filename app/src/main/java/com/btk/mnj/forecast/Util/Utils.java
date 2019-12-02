@@ -1,23 +1,28 @@
 package com.btk.mnj.forecast;
 
-import android.app.Application;
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.ConnectivityManager;
-
-import com.google.android.gms.location.GeofenceStatusCodes;
+import android.util.Log;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 public class  Utils {
 
-    private static HashMap<String,cordinates> citiListMap  = new HashMap<>();
+    private static final String TAG  = Utils.class.getSimpleName();
+    public static final String[] LOCATION_PERMISSION = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+
+    private static LinkedHashMap<String,cordinates> citiListMap  = new LinkedHashMap<>();
     private static LinkedHashMap<String, cordinates> addCityList =  new LinkedHashMap<>();
 
     private static Context mContext;
@@ -63,11 +68,16 @@ public class  Utils {
     }
 
     public static cordinates getCityFromAddedCityList(String city) {
-        return  addCityList.get(city);
+//        return  addCityList.get(city);
+        return citiListMap.get(city);
+    }
+
+    public static HashMap<String,cordinates> getCordinateMap() {
+        return citiListMap;
     }
 
     public static void populateCityList() {
-        citiListMap =  new HashMap<String, cordinates>();
+        citiListMap =  new LinkedHashMap<>();
         citiListMap.put("Abu Dhabi",new cordinates(24.453884,54.377342));
         citiListMap.put("Agra",new cordinates(27.176670,78.008072));
         citiListMap.put("Amsterdam",new cordinates(52.370216,4.895168));
@@ -78,6 +88,17 @@ public class  Utils {
         citiListMap.put("Bangkok",new cordinates(13.756331,100.501762));
         citiListMap.put("Barcelona",new cordinates(41.385063,2.173404));
         citiListMap.put("Beijing",new cordinates(39.607120,-77.705230));
+        citiListMap.put("Benidorm",new cordinates(38.541058,-0.122494));
+        citiListMap.put("Berlin",new cordinates(52.520008,13.404954));
+        citiListMap.put("Birmingham",new cordinates(33.518589,-86.810356));
+        citiListMap.put("Boston",new cordinates(42.360081,-71.058884));
+        citiListMap.put("Bratislava",new cordinates(48.148598,17.107748));
+        citiListMap.put("Bruges",new cordinates(51.209347,3.224699));
+        citiListMap.put("Brussels",new cordinates(50.850346,4.351721));
+        citiListMap.put("Bucharest",new cordinates(44.426765,26.102537));
+        citiListMap.put("Budapest",new cordinates(47.497913,19.040236));
+        citiListMap.put("Buenos Aires",new cordinates(-34.603683,-58.381557));
+
     }
 
     public static void getCordinatesfortheCity(String city,Context context) {
@@ -99,6 +120,44 @@ public class  Utils {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static int getForecastIcon(String forecastDescription) {
+        int icon;
+        switch (forecastDescription){
+            case "Drizzle":
+                icon = R.drawable.ic_drizzle;
+                break;
+            case "Clear":
+                icon = R.drawable.ic_clear;
+                break;
+            case "Mostly Cloudy":
+                icon = R.drawable.ic_cloudy;
+                break;
+            default:
+                icon = R.mipmap.ic_clear;
+        }
+        return icon;
+    }
+
+    public static String convertFahrenheitToCelcius(float fahrenheit) {
+        return Math.round((fahrenheit - 32) * 5 / 9) +"";
+    }
+
+    public static String getForecastDay(long time) {
+
+        Date date = new Date(time * 1000L);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        String formatted = format.format(date);
+        Log.v(TAG,"getForecastDay-->"+formatted);
+        return formatted;
+    }
+
+    public static Typeface getXLightTypeface(Context context) {
+        String mTtfFontName = "GothamNarrow-XLight.otf";
+        Typeface typeface =Typeface.createFromAsset(context.getAssets(), mTtfFontName);
+        return typeface;
     }
 
 }
