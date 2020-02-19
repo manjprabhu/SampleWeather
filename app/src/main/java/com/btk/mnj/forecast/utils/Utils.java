@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 import com.btk.mnj.forecast.R;
@@ -75,7 +76,6 @@ public class  Utils {
     }
 
     public static cordinates getCityFromAddedCityList(String city) {
-//        return  addCityList.get(city);
         return citiListMap.get(city);
     }
 
@@ -166,5 +166,18 @@ public class  Utils {
         Typeface typeface =Typeface.createFromAsset(context.getAssets(), mTtfFontName);
         return typeface;
     }
+
+    public boolean isNetworkAvailable() {
+        boolean isAvailable = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
+        if(connectivityManager.getActiveNetworkInfo() !=null
+                && connectivityManager.getActiveNetworkInfo().isConnected()) {
+            isAvailable = true;
+        }
+        return isAvailable;
+    }
+
+
+
 
 }

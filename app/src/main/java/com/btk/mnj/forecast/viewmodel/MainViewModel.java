@@ -60,7 +60,6 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void fetchActualData(String city) {
-//        HashMap<String, Float> cordinates = getCordinateforCity(city);
         Utils.cordinates cordinates = Utils.getCityFromAddedCityList(city);
 
         if(cordinates ==null) {
@@ -68,8 +67,6 @@ public class MainViewModel extends AndroidViewModel {
         }
         double latitude =  cordinates.getLatitude();
         double longitude = cordinates.getLongitude();
-//        float latitude =  cordinates.get("Latitude");
-//        float longitude = cordinates.get("Longitude");
         Log.v(TAG," viewmodel latitude-->"+latitude +"longitude-->"+longitude);
 
         WeatherService weatherService = RetrofitClient.getRetrofitClient().create(WeatherService.class);
@@ -88,27 +85,6 @@ public class MainViewModel extends AndroidViewModel {
                 Log.v(TAG,"Viewmodel onFailure:"+t.toString());
             }
         });
-    }
-
-    public void updateData(WeatherData data) {
-        Log.v(TAG,"UpdateData:");
-
-        WeatherService weatherService = RetrofitClient.getRetrofitClient().create(WeatherService.class);
-        weatherService.getData(Utils.KEY,data.getLatitude(),data.getLongitude()).enqueue(new Callback<WeatherData>() {
-            @Override
-            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                if(response.isSuccessful()) {
-                    Log.v(TAG,"UpdateData success:"+response.body());
-                    response.body().setCity(data.getCity());
-                    writePersistence(response.body());
-                }
-            }
-            @Override
-            public void onFailure(Call<WeatherData> call, Throwable t) {
-                Log.v(TAG,"UpdateData failure");
-            }
-        });
-
     }
 
     private HashMap<String, Float> getCordinateforCity(String city) {
@@ -152,15 +128,16 @@ public class MainViewModel extends AndroidViewModel {
         Log.v(TAG,"writePersistence:"+ data.getCity());
         List<WeatherData> weatherData = PersistenceManager.getInstance().get();
 
+        if(weatherData == null) {
+            weatherData = new ArrayList<>();
+        }
+
         if(weatherData!=null) {
             for(int i =0;i<weatherData.size();i++) {
                 Log.v(TAG,"writePersistence get:"+ weatherData.get(i).getCity());
                 if(weatherData.get(i).getCity().equalsIgnoreCase(data.getCity()))
                     return;
             }
-        }
-        if(weatherData == null) {
-            weatherData = new ArrayList<>();
         }
 
         weatherData.add(data);

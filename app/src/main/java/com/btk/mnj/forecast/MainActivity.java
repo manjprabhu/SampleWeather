@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements WeatherDataAdapte
                 ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, Utils.LOCATION_PERMISSION);
                 return;
         }
-
         getCurrentLocation();
     }
 
@@ -140,16 +139,6 @@ public class MainActivity extends AppCompatActivity implements WeatherDataAdapte
                 Toast.makeText(this,"No location permission",Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    public boolean isNetworkAvailable() {
-        boolean isAvailable = false;
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
-        if(connectivityManager.getActiveNetworkInfo() !=null
-            && connectivityManager.getActiveNetworkInfo().isConnected()) {
-            isAvailable = true;
-        }
-        return isAvailable;
     }
 
     @Override
@@ -184,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements WeatherDataAdapte
                 "weatherCardTransition");
 
         intent.putExtra("weatherData",  weatherData);
-        startActivity(intent);//,options.toBundle());
+        startActivity(intent);
     }
 
     private void showProgressDialog() {
