@@ -25,12 +25,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.btk.mnj.forecast.Model.WeatherData;
-import com.btk.mnj.forecast.Util.PersistenceManager;
-import com.btk.mnj.forecast.Util.Utils;
+import com.btk.mnj.forecast.model.WeatherData;
+import com.btk.mnj.forecast.utils.PersistenceManager;
+import com.btk.mnj.forecast.utils.Utils;
 import com.btk.mnj.forecast.databinding.MainViewLayoutBinding;
-import com.btk.mnj.forecast.viewModel.MainViewModel;
-import com.btk.mnj.forecast.viewModel.WeatherDataAdapter;
+import com.btk.mnj.forecast.viewmodel.MainViewModel;
+import com.btk.mnj.forecast.viewmodel.WeatherDataAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -72,27 +72,6 @@ public class MainActivity extends AppCompatActivity implements WeatherDataAdapte
     protected void onResume() {
         super.onResume();
         Log.v(TAG,"onResume:");
-
-       /* viewModel.getWeatherData().observe(this, new Observer<WeatherData>() {
-            @Override
-            public void onChanged(@Nullable WeatherData data) {
-                Log.i(TAG","onChanged cities size-->"+cities.size()+ ":data:"+data);
-
-                for(int i =0;i<cities.size();i++) {
-                    Log.i(TAG,"item-->"+cities.get(i).getCurrentWeatherData().getSummary());
-                    Log.i(TAG,"item-->"+cities.get(i).getCity());
-                    if(cities.get(i).getCity().equalsIgnoreCase(data.getCity())) {
-                        return;
-                    }
-                }
-                if(data!=null) {
-                    cities.add(data);
-                    Log.i(TAG,"Data!=null cities size"+ cities.size());
-                    mAdapter.updateData(cities);
-                }
-            }
-        });*/
-
        viewModel.getWeatherDataList().observe(this, new Observer<List<WeatherData>>() {
            @Override
            public void onChanged(@Nullable List<WeatherData> weatherData) {
@@ -118,9 +97,11 @@ public class MainActivity extends AppCompatActivity implements WeatherDataAdapte
     }
 
     private void getCurrentLocation() {
+        Log.v(TAG,"getCurrentLocation");
             mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
+                    Log.v(TAG,"getCurrentLocation success:"+location);
                     if(location != null) {
                         android.util.Log.v(TAG,"location-->"+location.getLatitude()+ "Longitude-->"+location.getLongitude()+ " Name:"+location.toString());
                         viewModel.fetchCurrentCityData(location.getLatitude(), location.getLongitude());
@@ -137,23 +118,24 @@ public class MainActivity extends AppCompatActivity implements WeatherDataAdapte
     }
 
     private void requestLoctionPermission() {
+        Log.v(TAG,"requestLoctionPermission");
         if((ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)||
             (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
                 ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, Utils.LOCATION_PERMISSION);
                 return;
         }
+
         getCurrentLocation();
-//        requestCurrentLocation();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        Log.v(TAG,"onRequestPermissionsResult");
         if(requestCode == Utils.LOCATION_PERMISSION) {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getCurrentLocation();
-//                requestCurrentLocation();
             } else {
                 Toast.makeText(this,"No location permission",Toast.LENGTH_LONG).show();
             }

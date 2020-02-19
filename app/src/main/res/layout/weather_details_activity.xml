@@ -6,21 +6,21 @@
 
     <data>
 
-        <import type="com.btk.mnj.forecast.Model.WeatherData"/>
-        <import type="com.btk.mnj.forecast.Model.currently"/>
-        <import type="com.btk.mnj.forecast.Model.DailyWeatherData"/>
+        <import type="com.btk.mnj.forecast.model.WeatherData"/>
+        <import type="com.btk.mnj.forecast.model.Currently"/>
+        <import type="com.btk.mnj.forecast.model.DailyWeatherData"/>
 
         <variable
             name="weatherdata"
-            type="com.btk.mnj.forecast.Model.WeatherData" />
+            type="com.btk.mnj.forecast.model.WeatherData" />
 
         <variable
             name="currentdata"
-            type="com.btk.mnj.forecast.Model.currently" />
+            type="com.btk.mnj.forecast.model.Currently" />
 
         <variable
             name="dailydata"
-            type="com.btk.mnj.forecast.Model.DailyWeatherData" />
+            type="com.btk.mnj.forecast.model.DailyWeatherData" />
 
     </data>
 

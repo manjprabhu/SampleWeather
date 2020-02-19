@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.btk.mnj.forecast.Util.Utils;
+import com.btk.mnj.forecast.utils.Utils;
 
 import java.util.HashMap;
 

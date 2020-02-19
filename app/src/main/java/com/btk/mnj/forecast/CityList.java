@@ -10,7 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.btk.mnj.forecast.Util.Utils;
+import com.btk.mnj.forecast.utils.Utils;
 import com.btk.mnj.forecast.databinding.ActivityCityListBinding;
 
 public class CityList extends AppCompatActivity implements CityListAdapter.ClickHandler{

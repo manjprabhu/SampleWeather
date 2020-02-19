@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.btk.mnj.forecast.Model.WeatherData;
+import com.btk.mnj.forecast.model.WeatherData;
 import com.btk.mnj.forecast.adapters.WeatherDetailsAdapter;
 import com.btk.mnj.forecast.databinding.WeatherDetailsActivityBinding;
 

@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.btk.mnj.forecast.Model.WeatherData;
+import com.btk.mnj.forecast.model.WeatherData;
 import com.btk.mnj.forecast.R;
-import com.btk.mnj.forecast.Util.Utils;
+import com.btk.mnj.forecast.utils.Utils;
 
 public class WeatherDetailsAdapter extends RecyclerView.Adapter<WeatherDetailsAdapter.ForecastViewHolder> {
 
